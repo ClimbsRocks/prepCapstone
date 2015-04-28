@@ -51,13 +51,18 @@ var renderGameBoard = function(gameBoard) {
         // Those style properties include it's size (height and width) in pixels (px). 
         // We're setting it's background color to be the color of that squareObj. 
       // To keep track of which square this is (necessary for figuring out which square was clicked on later), we set a data "property" on each square as well. 
-      // Inside of each div, we can put whatever text we want! Or none at all- it doesn't care. So we put in the text from the object at that position, if one exists
+      // Inside of each div, we can put whatever text we want! Or none at all- it doesn't care. So we put in the text from the object at that position, if one exists. 
+      // OPTIONAL: You can change what gets rendered for each square. Want to display the name differently? Feel free to modify the code below to do what you want!
       // TODO: refactor rowIndex and columnIndex to be data attributes, not classes?? i like the idea of being able to operate on all of them at the same time, but i can't think of what practical purpse that would have, particularly when we're doing everything in JS and then just wiping/re-rendering it all each time there's a change. 
-      var squareHtml = '<div class=gameSquare "' + rowIndex + ' ' + columnIndex + '" style="background-color:' + squareObj.color + '; height:' + squareSize + 'px; width:' + squareSize + 'px">This is my square!</div>';
-      console.log(squareHtml);
+      var squareHtml = '<div class="gameSquare" style="background-color:' + squareObj.color + '; height:' + squareSize + 'px; width:' + squareSize + 'px" data-position="[' + rowIndex + ',' + columnIndex + ']">This is my square!</div>';
       $('.gameBoard').append(squareHtml);
     });
   });
+
+  // NOTE: we attach the event listeners AFTER we have appended the elements to the DOM. You will definitely get tripped up by this at some point in your career :)
+$(document).on('click', '.gameSquare', function() {
+  console.log($(this).data('position'));
+});
   // TODO: attach event listeners
   // TODO: add image if it exists on a piece
     // TODO: size image appropriately if it exists
