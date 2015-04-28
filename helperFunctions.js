@@ -25,11 +25,14 @@ var makeGameBoard = function(boardSize) {
 };
 
 //we create an initial gameBoard of size 8x8. Feel free to modify as you'd prefer!
-makeGameBoard(8);
+var gameBoard = makeGameBoard(8);
 
 //here we're going to keep track of the count of all pieces added to our gameBoard. 
 var totalPieceCount = {};
 
+//initialPosition should be an array with two numbers in it. 
+  // those numbers should specify the 0-indexed row and column you want this piece to start at. 
+  // example: [1,3] would put the piece on the second row (remember we're 0-indexed) in the 4th column. 
 var makePiece = function(initialPosition, pieceType, playerBelongsTo) {
   // make sure this piece is counted in our totalPieceCount object. 
   if(totalPieceCount[pieceType]) {
@@ -51,6 +54,11 @@ var makePiece = function(initialPosition, pieceType, playerBelongsTo) {
     playerBelongsTo: playerBelongsTo  // if you have a game with two (or more?!) players playing against each other, you'll want to specify which player this piece belongs to
 
   }
+
+  var row = initialPosition[0];
+  var column = initialPosition[1];
+
+  gameBoard[row][column].push(gamePiece);
 
   return gamePiece;
 };
