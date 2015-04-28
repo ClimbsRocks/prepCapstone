@@ -1,8 +1,11 @@
-//Here's where you get to write your very own game!
+// We've created several helper functions to handle the rendering of your code on the screen. If you're interested, you can learn everything this file is doing by reading through the comments and doing some Googling. 
+// The $(document).ready(function() {}) part just says "Wait to run the code inside here until after everything we need on the page has loaded."
+$(document).ready(function() {
 var makeGameBoard = function(boardSize) {
   var board = [];
   //board is an array of arrays. console.log it to investigate it further!
   for(var i = 0; i < boardSize; i++) {
+    var row = [];
     for(var j = 0; j < boardSize; j++) {
       //set an initial pattern of alternating colors on each square). 
       if ( (i + j) % 2 === 0 ) {
@@ -17,8 +20,9 @@ var makeGameBoard = function(boardSize) {
         text: '',
         imageURL: ''
       };
-      board.push(square);
+      row.push(square);
     }
+    board.push(row);
   }
 
   return board;
@@ -26,6 +30,21 @@ var makeGameBoard = function(boardSize) {
 
 //we create an initial gameBoard of size 8x8. Feel free to modify as you'd prefer!
 var gameBoard = makeGameBoard(8);
+
+var renderGameBoard = function(gameBoard) {
+  var boardSize = gameBoard.length;
+  // we scale the gameBoard to the user's screen. First we find which is smaller, the height or width of the user's browser
+  var browserSize = Math.min($(window).height(), $(window).width());
+  // then we leave some room around the edges (200 pixels), and divide by the number of squares to find how large the squares should be to fill that space perfectly.
+  var squareSize = (browserSize - 200) / boardSize;
+  gameBoard.forEach(function(rowArr, rowIndex) {
+    rowArr.forEach(function(square, columnIndex) {
+      var squareHtml = '<div class=gameSquare "' + rowIndex + ' ' + columnIndex + '" >This is my square!</div>';
+      $('.gameBoard').append(squareHtml);
+    });
+  });
+}
+renderGameBoard(gameBoard);
 
 //here we're going to keep track of the count of all pieces added to our gameBoard. 
 var totalPieceCount = {};
@@ -66,3 +85,4 @@ var makePiece = function(initialPosition, pieceType, playerBelongsTo) {
 var addImageToGamePiece = function(imageURL, gamePiece) {
   //build out logic to scale the photo. Is that possible in JS?
 }
+});
