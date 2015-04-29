@@ -4,6 +4,7 @@ $(document).ready(function() {
 
 // We've created some helper functions FINISH THIS- explain the helperFunctions we've created, how to use each one, and that they're just to handle the rendering so they get to focus on the JS logic. GOAL: make them feel like they own the repo, and that what we've built out for them already is trivial. 
 
+
 // Let's start off by getting used to the gameBoard and how this project is structured.
 
 // gameBoard is an array of arrays (an array that is filled with other arrays). Let's start by using each to iterate through the first row of the gameBoard (the array at position 0 in the gameBoard array). 
@@ -15,6 +16,7 @@ $(document).ready(function() {
     // Think through how we'd use each and map in different ways from each other to accomplish the same goal. 
   // Now that we've figured out how to use map and each to change the colors in a row, let's nest them inside of each to change all of the rows!
     // Try doing this in two different ways, one with map nested inside of each, and one with an each statement nested inside of the outer each. 
+
 
 // Awesome! Now we've got a decent understanding of the gameBoard. Now let's test out the makePiece function. 
   // In programming, it's a super useful skill to get used to just looking at the interfaces of things, and not worrying too much about how they work inside. If you try to figure out how everything works inside you'll find yourself descending through many deep, dark, and scary caves that oftentimes don't expand your programming knowledge very much. Try checking out the interface for makePiece (what parameters it takes and what's returned from it).
@@ -63,9 +65,25 @@ $(document).ready(function() {
   // Use map to change properties on each object (description, imageURL, collisionDescription, etc.)
   // Use map to advance all pieces one space closer towards the center (if their row is more than half, move their row down by one, if their row is less than half, increase their row by one).
   // Use filter to find only those squares that have a collision. 
-  // Use map to change the colors of the squares in a single row
-  // Use each to change the colors of all rows, in conjunction with the code you've just written with map
   // What are other easy ways of easing them into this? 
+  // Use map to change the color of all squares a piece is eligible to move to. 
+    // Store this as a method on each gamePiece object, so you can just call gamePiece.highlightSquares() no matter which piece it is
+  // Hightlight all the squares that all gamePieces can move to!
+  // Add a count of the number of pieces that could move to a certain square, onto every square. We could definitely use some functional programming for this. 
+  // When a piece is clicked:
+    // Set that piece to active if it's the first time it's clicked
+    // Change the color of all the squares that piece can move to.
+    // Deactivate that piece if it already is the active one. 
+    // Change back the color of all the squares that piece can move to. 
+
+  // When a piece is moved:
+    // Check to make sure it's a valid move
+    // If so change the color of the squares it can move to back to their original color
+      // check for collisions
+      // perform whatever logic suits your game on a collision
+        // ADVANCED: don't let a piece move through another piece. If it's moving down a row, and there's a piece between it and it's destination, it should not be allowed to complete that move. 
+    // If it is not a valid move, alert the user that this is not a valid move. Give them the chance to cancel (deactivate) this piece by clicking on Ok or Cancel
+
 
 // NOTE: there are two separate things going on: you making a change to the javascript code/logic behind the app, and rendering that new "state" to the DOM (what appears on the screen). In order to see any changes you make rendered to the screen, you need to call renderGameBoard() and pass in the updated gameBoard as an argument. 
 
