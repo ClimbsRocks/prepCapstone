@@ -1,14 +1,15 @@
-// We've created several helper functions to handle the rendering of your code on the screen. If you're interested, you can learn everything this file is doing by reading through the comments and doing some Googling. 
+// Helper functions to handle rendering things to the screen so you can focus on writing the JS logic. 
+// If you're interested, you can learn everything this file is doing by reading through the comments and doing some Googling. 
 
 var makeGameBoard = function(boardSize) {
   var board = [];
-  //board is an array of arrays. console.log it to investigate it further!
+  // Board is an array of arrays. console.log it to investigate it further!
   for(var i = 0; i < boardSize; i++) {
     var row = [];
     for(var j = 0; j < boardSize; j++) {
       var telegraphBlue1 = '#48B9C4';
       var telegraphBlue2 = '#1A3D6D';
-      //set an initial pattern of alternating colors on each square). 
+      //set an initial pattern of alternating colors on each square. 
       if ( (i + j) % 2 === 0 ) {
         var color = telegraphBlue1;
       } else {
@@ -16,8 +17,9 @@ var makeGameBoard = function(boardSize) {
       }
       //each square (position on the board) is represented by an object. 
       var square = {
+        position: [row, column],
         color: color,
-        gamePiece: 0,
+        gamePieces: [], // This is the array that will contain our gamePiece object(s) if one or more are on that square. 
         text: '',
         imageURL: ''
       };
@@ -29,11 +31,8 @@ var makeGameBoard = function(boardSize) {
   return board;
 };
 
-//we create an initial gameBoard of size 8x8. Feel free to modify size as you'd prefer!
-// NOTE: we explicitly set it on the global scope since the $(document).ready(function() {}) creates it's own local scope. 
-
 // Call this function each time you make a change and want that change to appear on the screen. Otherwise, your "code" will know that the change happened, but the screen won't know that it's supposed to update. 
-// There are more elegant ways of doing this (right now we're wiping out the existing rendered gameBoard entirely and rendering the whole new one). We could just update individual pieces, but that would require us to build out more helper functions for the students, which would decrease their feeling of ownership over the whole project. This way also explicitly calls out that updating state and updating rendering are two separate things. This also lets the student focus on what they feel comfortable with and what the goal of the course is (writing JS logic/functional programming), and really not have to think about DOM or rendering stuff much at all. 
+// INTERNAL: There are more elegant ways of doing this (right now we're wiping out the existing rendered gameBoard entirely and rendering the whole new one). We could just update individual pieces, but that would require us to build out more helper functions for the students, which would decrease their feeling of ownership over the whole project. This way also explicitly calls out that updating state and updating rendering are two separate things. This also lets the student focus on what they feel comfortable with and what the goal of the course is (writing JS logic/functional programming), and really not have to think about DOM or rendering stuff much at all. 
 var renderGameBoard = function(gameBoard) {
   $('.gameBoard').html('');
   var boardSize = gameBoard.length;
