@@ -1,8 +1,35 @@
 // The $(document).ready(function() {}) just says "Wait to run the code inside here until after everything we need on the page has loaded."
 $(document).ready(function() {
-// NOTE: it is an explicit goal of this project to get you familiar with functional programming. Functional programming is a whole new way of thinking that requires some practice and repetition to become natural. These prompts are designed to give you practice using functional programming, so go through them as they're written, even if you can think of other ways of doing them. 
+// NOTE: it is an explicit goal of this project to get you familiar with functional programming. Functional programming is a whole new way of thinking that requires some practice and experience to feel natural. These prompts are designed to give you experience using functional programming, so go through them as they're written, even if you can think of other ways of doing them without using functional programming. 
 
-// We've created FINISH THIS
+// We've created some helper functions FINISH THIS- explain the helperFunctions we've created, how to use each one, and that they're just to handle the rendering so they get to focus on the JS logic. GOAL: make them feel like they own the repo, and that what we've built out for them already is trivial. 
+
+// Let's start off by getting used to the gameBoard and how this project is structured.
+
+// gameBoard is an array of arrays (an array that is filled with other arrays). Let's start by using each to iterate through the first row of the gameBoard (the array at position 0 in the gameBoard array). 
+  // Let's change every other square (say, the even ones) to a different color of your choosing. 
+    // If you're not familiar with colors in JS, you can do this in three main ways: through rgb values, hex values (the way we've done it right now), or just typing in a color name like 'orange'
+  // Now let's do the same thing using map. 
+    // We only changed every other square in that first row using each. So now let's change the odd squares to a new color so that all the squares have been changed. 
+    // What's the key difference between map and each? ANSWER: map returns an array, whereas each only has side effects, and does not return anything. 
+    // Think through how we'd use each and map in different ways from each other to accomplish the same goal. 
+  // Now that we've figured out how to use map and each to change the colors in a row, let's nest them inside of each to change all of the rows!
+    // Try doing this in two different ways, one with map nested inside of each, and one with an each statement nested inside of the outer each. 
+
+// Awesome! Now we've got a decent understanding of the gameBoard. Now let's test out the makePiece function. 
+  // In programming, it's a super useful skill to get used to just looking at the interfaces of things, and not worrying too much about how they work inside. If you try to figure out how everything works inside you'll find yourself descending through many deep, dark, and scary caves that oftentimes don't expand your programming knowledge very much. Try checking out the interface for makePiece (what parameters it takes and what's returned from it).
+  // TODO: move interfaces speech to be for gameBoard??
+  // Let's add a new piece (name it anything you want. babyDino is my current favorite, but I'm sure you'll have fun coming up with your own favorite gamePieces!). Try invoking makePiece with the right parameters and make sure it worked by opening up your browser.  
+  // Now that we've added a piece to the board, let's use that piece to practice filter. 
+  // Invoke filter on the row that you just added the gamePiece to. See if you can use it to return an array of only the square(s) that have a gamePiece on them. Do you remember where we're storing gamePieces on each squareObj? 
+  // Now try adding gamePieces to a couple of different rows throughout the board. Can you use each, in conjunction with filter, to find all the squares on the whole board that have a piece on them? 
+  // Great! At this point, we should have an array that is filled with nested arrays. Each object in those nested arrays should be a square that has a gamePiece on it. 
+  // Having that information scattered throughout a bunch of different arrays seems messy. You can probably think of plenty of cases where we'd want to have all that information collected into a single array. 
+  // Wait, that's starting to sound like reduce! We're taking a collection of a bunch of things, and reducing it down to a single thing. 
+    // Can you think of a way we could use reduce to reduce an array filled with arrays to a single array just filled with all the values contained in each subarray? 
+    // Hint: what if we tried passing in an empty array as the starting value?
+    // If it's easier to visualize, practice on this: [[1,2,3],[4],[5,6,7,8],[9,10]]. We can use reduce to simplify that down to a single value of [1,2,3,4,5,6,7,8,9,10].
+
 
 // INTERNAL: explicitly calling these arrays 'ToAdd' should prevent any possible confusion from students trying to store the pieces into these arrays, since we only want them permanently stored in the gameBoard. 
 // 1. Create an array called piecesToAdd that holds the names of each of the pieces we'll create for each player. For example: ['kuddlyKoala', 'babyDino','babyDino', 'babyDino', 'fierceDragon', 'lazyPanda', 'lazyPanda']
@@ -35,7 +62,10 @@ $(document).ready(function() {
   // Use filter to go through an objects array and only return objects of a particular type. 
   // Use map to change properties on each object (description, imageURL, collisionDescription, etc.)
   // Use map to advance all pieces one space closer towards the center (if their row is more than half, move their row down by one, if their row is less than half, increase their row by one).
-  
+  // Use filter to find only those squares that have a collision. 
+  // Use map to change the colors of the squares in a single row
+  // Use each to change the colors of all rows, in conjunction with the code you've just written with map
+  // What are other easy ways of easing them into this? 
 
 // NOTE: there are two separate things going on: you making a change to the javascript code/logic behind the app, and rendering that new "state" to the DOM (what appears on the screen). In order to see any changes you make rendered to the screen, you need to call renderGameBoard() and pass in the updated gameBoard as an argument. 
 
