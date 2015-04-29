@@ -1,5 +1,7 @@
 .gameSquare {
     display:inline-block;
+    color:white;
+    vertical-align: top;
 }
 
 .gameBoard {

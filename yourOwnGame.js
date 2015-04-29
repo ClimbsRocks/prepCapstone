@@ -1,3 +1,4 @@
+// The $(document).ready(function() {}) part just says "Wait to run the code inside here until after everything we need on the page has loaded."
 $(document).ready(function() {
 // NOTE: it is an explicit goal of this project to get you familiar with functional programming. Functional programming is a whole new way of thinking that requires some practice and repetition to become natural. These prompts are designed to give you practice using functional programming, so go through them as they're written, even if you can think of other ways of doing them. 
 //use filter to grab all pieces of the same type, and then use map to iterate through them and set their movement descriptions
@@ -21,5 +22,12 @@ $(document).ready(function() {
     console.log(gameBoard[row][column]);
     // console.log('position inside clickHandler!' + positionArr);
   };
+  gameBoard[0][0].gamePiece.imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
+
+  renderGameBoard(gameBoard);
+
+// STUDENT: Use filter to iterate through all the positions on the board, grabbing each gamePiece object
+  // Then, use map to add a link to an image to the appropriate property on each of those objects. 
+
 
 });
