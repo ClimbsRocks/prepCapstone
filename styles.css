@@ -4,6 +4,8 @@
     vertical-align: top;
 }
 
-.gameBoard {
-  /*TODO: center the gameBoard within the page*/
+.gameBoard, .logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

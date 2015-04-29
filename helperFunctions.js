@@ -6,12 +6,13 @@ var makeGameBoard = function(boardSize) {
   for(var i = 0; i < boardSize; i++) {
     var row = [];
     for(var j = 0; j < boardSize; j++) {
+      var telegraphBlue1 = '#48B9C4';
+      var telegraphBlue2 = '#1A3D6D';
       //set an initial pattern of alternating colors on each square). 
       if ( (i + j) % 2 === 0 ) {
-        // TODO: make default colors Telegraph colors :)
-        var color = 'blue';
+        var color = telegraphBlue1;
       } else {
-        var color = 'green';
+        var color = telegraphBlue2;
       }
       //each square (position on the board) is represented by an object. 
       var square = {
@@ -38,9 +39,9 @@ var renderGameBoard = function(gameBoard) {
   var boardSize = gameBoard.length;
   // we scale the gameBoard to the user's screen. First we find which is smaller, the height or width of the user's browser
   var browserSize = Math.min($(window).height(), $(window).width());
-  $('.gameBoard').width(browserSize - 200);
+  $('.gameBoard').width(browserSize - 110);
   // then we leave some room around the edges (200 pixels), and divide by the number of squares to find how large the squares should be to fill that space perfectly.
-  var squareSize = (browserSize - 200) / boardSize;
+  var squareSize = (browserSize- 110) / boardSize;
   gameBoard.forEach(function(rowArr, rowIndex) {
     rowArr.forEach(function(squareObj, columnIndex) {
       // Here we are creating the HTML that will be rendered to the DOM for each square. 
@@ -71,9 +72,6 @@ var renderGameBoard = function(gameBoard) {
     console.log($(this));
     clickHandler($(this).data('position'));
   });
-  // TODO: add image if it exists on a piece
-    // TODO: size image appropriately if it exists
-  // TODO: include text if it exists on a piece- display name by default
 }
 // renderGameBoard(gameBoard);
 
@@ -112,7 +110,3 @@ var makePiece = function(gameBoard, initialPosition, pieceType, playerBelongsTo)
 
   return gamePiece;
 };
-
-var addImageToGamePiece = function(imageURL, gamePiece) {
-  //build out logic to scale the photo. Is that possible in JS?
-}
