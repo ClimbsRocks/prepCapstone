@@ -17,7 +17,7 @@ var makeGameBoard = function(boardSize) {
       }
       //each square (position on the board) is represented by an object. 
       var square = {
-        position: [row, column],
+        position: [i, j],
         color: color,
         gamePieces: [], // This is the array that will contain our gamePiece object(s) if one or more are on that square. 
         text: '',
@@ -52,6 +52,7 @@ var renderGameBoard = function(gameBoard) {
       // To keep track of which square this is (necessary for figuring out which square was clicked on later), we set a data "property" on each square as well. 
       // Inside of each div, we can put whatever text we want! Or none at all- it doesn't care. So we put in the text from the object at that position, if one exists. 
       // OPTIONAL: You can change what gets rendered for each square. Want to display the name differently? Feel free to modify the code below to do what you want!
+      // TODO: refactor now that we're storing gamePieces in an array
       if(squareObj.gamePiece && squareObj.gamePiece.imageURL) {
         var squareHtml = '<img src="' + squareObj.gamePiece.imageURL + '" class="gameSquare" style="height:' + squareSize + 'px; width:' + squareSize + 'px" data-position="[' + rowIndex + ',' + columnIndex + ']">'
       } else {
@@ -105,7 +106,7 @@ var makePiece = function(gameBoard, initialPosition, pieceType, playerBelongsTo)
   var row = initialPosition[0];
   var column = initialPosition[1];
 
-  gameBoard[row][column].gamePiece = gamePiece;
+  gameBoard[row][column].gamePiece.push( gamePiece );
 
   return gamePiece;
 };
