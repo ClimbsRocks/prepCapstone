@@ -1,3 +1,7 @@
 .gameSquare {
     display:inline-block;
 }
+
+.gameBoard {
+  /*TODO: center the gameBoard within the page*/
+}

@@ -1,7 +1,8 @@
 // We've created several helper functions to handle the rendering of your code on the screen. If you're interested, you can learn everything this file is doing by reading through the comments and doing some Googling. 
 // The $(document).ready(function() {}) part just says "Wait to run the code inside here until after everything we need on the page has loaded."
-$(document).ready(function() {
-var makeGameBoard = function(boardSize) {
+// $(document).ready(function() {
+
+window.makeGameBoard = function(boardSize) {
   var board = [];
   //board is an array of arrays. console.log it to investigate it further!
   for(var i = 0; i < boardSize; i++) {
@@ -29,12 +30,12 @@ var makeGameBoard = function(boardSize) {
   return board;
 };
 
-//we create an initial gameBoard of size 8x8. Feel free to modify as you'd prefer!
-var gameBoard = makeGameBoard(8);
+//we create an initial gameBoard of size 8x8. Feel free to modify size as you'd prefer!
+// NOTE: we explicitly set it on the global scope since the $(document).ready(function() {}) creates it's own local scope. 
 
 // Call this function each time you make a change and want that change to appear on the screen. Otherwise, your "code" will know that the change happened, but the screen won't know that it's supposed to update. 
 // There are more elegant ways of doing this (right now we're wiping out the existing rendered gameBoard entirely and rendering the whole new one). We could just update individual pieces, but that would require us to build out more helper functions for the students, which would decrease their feeling of ownership over the whole project. This way also explicitly calls out that updating state and updating rendering are two separate things. This also lets the student focus on what they feel comfortable with and what the goal of the course is (writing JS logic/functional programming), and really not have to think about DOM or rendering stuff much at all. 
-var renderGameBoard = function(gameBoard) {
+window.renderGameBoard = function(gameBoard) {
   $('.gameBoard').html('');
   var boardSize = gameBoard.length;
   // we scale the gameBoard to the user's screen. First we find which is smaller, the height or width of the user's browser
@@ -60,24 +61,23 @@ var renderGameBoard = function(gameBoard) {
   });
 
   // NOTE: we attach the event listeners AFTER we have appended the elements to the DOM. You will definitely get tripped up by this at some point in your career :)
-$(document).on('click', '.gameSquare', function() {
-  console.log($(this).data('position'));
-});
-  // TODO: attach event listeners
+  $(document).on('click', '.gameSquare', function() {
+    console.log($(this));
+    clickHandler($(this).data('position'));
+  });
   // TODO: add image if it exists on a piece
     // TODO: size image appropriately if it exists
   // TODO: include text if it exists on a piece- display name by default
-  // TODO: comments for what this is doing to not intimidate students
 }
-renderGameBoard(gameBoard);
+// renderGameBoard(gameBoard);
 
 //here we're going to keep track of the count of all pieces added to our gameBoard. 
-var totalPieceCount = {};
+window.totalPieceCount = {};
 
 //initialPosition should be an array with two numbers in it. 
   // those numbers should specify the 0-indexed row and column you want this piece to start at. 
   // example: [1,3] would put the piece on the second row (remember we're 0-indexed) in the 4th column. 
-var makePiece = function(initialPosition, pieceType, playerBelongsTo) {
+window.makePiece = function(gameBoard, initialPosition, pieceType, playerBelongsTo) {
   // make sure this piece is counted in our totalPieceCount object. 
   if(totalPieceCount[pieceType]) {
     totalPieceCount[pieceType]++;
@@ -102,7 +102,7 @@ var makePiece = function(initialPosition, pieceType, playerBelongsTo) {
   var row = initialPosition[0];
   var column = initialPosition[1];
 
-  gameBoard[row][column].push(gamePiece);
+  gameBoard[row][column].gamePiece = gamePiece;
 
   return gamePiece;
 };
@@ -110,4 +110,4 @@ var makePiece = function(initialPosition, pieceType, playerBelongsTo) {
 var addImageToGamePiece = function(imageURL, gamePiece) {
   //build out logic to scale the photo. Is that possible in JS?
 }
-});
+// });
