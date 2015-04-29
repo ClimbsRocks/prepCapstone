@@ -53,12 +53,12 @@ var renderGameBoard = function(gameBoard) {
       // Inside of each div, we can put whatever text we want! Or none at all- it doesn't care. So we put in the text from the object at that position, if one exists. 
       // OPTIONAL: You can change what gets rendered for each square. Want to display the name differently? Feel free to modify the code below to do what you want!
       // TODO: refactor now that we're storing gamePieces in an array
-      if(squareObj.gamePiece && squareObj.gamePiece.imageURL) {
-        var squareHtml = '<img src="' + squareObj.gamePiece.imageURL + '" class="gameSquare" style="height:' + squareSize + 'px; width:' + squareSize + 'px" data-position="[' + rowIndex + ',' + columnIndex + ']">'
+      if(squareObj.gamePieces[0] && squareObj.gamePieces[0].imageURL) {
+        var squareHtml = '<img src="' + squareObj.gamePieces[0].imageURL + '" class="gameSquare" style="height:' + squareSize + 'px; width:' + squareSize + 'px" data-position="[' + rowIndex + ',' + columnIndex + ']">'
       } else {
         var squareText = '';
-        if(squareObj.gamePiece) {
-          squareText = squareObj.gamePiece.name;
+        if(squareObj.gamePieces[0]) {
+          squareText = squareObj.gamePieces[0].name;
         }
         var squareHtml = '<div class="gameSquare" style="background-color:' + squareObj.color + '; height:' + squareSize + 'px; width:' + squareSize + 'px" data-position="[' + rowIndex + ',' + columnIndex + ']">' + squareText + '</div>';
       }
@@ -106,7 +106,7 @@ var makePiece = function(gameBoard, initialPosition, pieceType, playerBelongsTo)
   var row = initialPosition[0];
   var column = initialPosition[1];
 
-  gameBoard[row][column].gamePiece.push( gamePiece );
+  gameBoard[row][column].gamePieces.push( gamePiece );
 
   return gamePiece;
 };

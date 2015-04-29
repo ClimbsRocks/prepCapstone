@@ -104,7 +104,7 @@ $(document).ready(function() {
     console.log(gameBoard[row][column]);
     // console.log('position inside clickHandler!' + positionArr);
   };
-  gameBoard[0][0].gamePiece.imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
+  gameBoard[0][0].gamePieces[0].imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
 
   renderGameBoard(gameBoard);
 
