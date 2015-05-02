@@ -7,19 +7,19 @@ var makeGameBoard = function(boardSize) {
   for(var i = 0; i < boardSize; i++) {
     var row = [];
     for(var j = 0; j < boardSize; j++) {
-      var telegraphBlue1 = '#48B9C4';
+      var telegraphBlue1 = '#48B9C4'; //these are 'hex' representations of colors. It's just a way of telling the machine exactly what shade of blue we want. 
       var telegraphBlue2 = '#1A3D6D';
       //set an initial pattern of alternating colors on each square. 
       if ( (i + j) % 2 === 0 ) {
-        var color = telegraphBlue1;
+        var color = telegraphBlue1; 
       } else {
-        var color = telegraphBlue2;
+        color = telegraphBlue2; //remember that if and for loops don't create their own scope, only function bodies. 
       }
       //each square (position on the board) is represented by an object. 
       var square = {
         position: [i, j],
         color: color,
-        gamePieces: [], // This is the array that will contain our gamePiece object(s) if one or more are on that square. 
+        gamePiece: '', // This is the property that will contain our gamePiece object if one is on that square. 
         text: '',
         imageURL: ''
       };
@@ -53,12 +53,12 @@ var renderGameBoard = function(gameBoard) {
       // Inside of each div, we can put whatever text we want! Or none at all- it doesn't care. So we put in the text from the object at that position, if one exists. 
       // OPTIONAL: You can change what gets rendered for each square. Want to display the name differently? Feel free to modify the code below to do what you want!
       // TODO: refactor now that we're storing gamePieces in an array
-      if(squareObj.gamePieces[0] && squareObj.gamePieces[0].imageURL) {
-        var squareHtml = '<img src="' + squareObj.gamePieces[0].imageURL + '" class="gameSquare" style="height:' + squareSize + 'px; width:' + squareSize + 'px" data-position="[' + rowIndex + ',' + columnIndex + ']">'
+      if(squareObj.gamePiece && squareObj.gamePiece.imageURL) {
+        var squareHtml = '<img src="' + squareObj.gamePiece.imageURL + '" class="gameSquare" style="height:' + squareSize + 'px; width:' + squareSize + 'px" data-position="[' + rowIndex + ',' + columnIndex + ']">'
       } else {
         var squareText = '';
-        if(squareObj.gamePieces[0]) {
-          squareText = squareObj.gamePieces[0].name;
+        if(squareObj.gamePiece) {
+          squareText = squareObj.gamePiece.name;
         }
         var squareHtml = '<div class="gameSquare" style="background-color:' + squareObj.color + '; height:' + squareSize + 'px; width:' + squareSize + 'px" data-position="[' + rowIndex + ',' + columnIndex + ']">' + squareText + '</div>';
       }
@@ -106,7 +106,7 @@ var makePiece = function(gameBoard, initialPosition, pieceType, playerBelongsTo)
   var row = initialPosition[0];
   var column = initialPosition[1];
 
-  gameBoard[row][column].gamePieces.push( gamePiece );
+  gameBoard[row][column].gamePiece = gamePiece;
 
   return gamePiece;
 };
