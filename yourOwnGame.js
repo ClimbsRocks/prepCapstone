@@ -13,7 +13,12 @@ $(document).ready(function() {
 
 // Let's start off by getting used to the gameBoard and how this project is structured.
 
-// gameBoard is an array of arrays (an array that is filled with other arrays). Let's start by using each to iterate through the first row of the gameBoard (the array at position 0 in the gameBoard array). 
+// gameBoard is an array of arrays (an array that is filled with other arrays). Let's start by using each to iterate through the gameBoard array, console.logging each item inside the gameBoard array. You should see 8 arrays, each of length 8, logged to your console. Each array here represents a row. 
+// Ok, now that we see the gameBoard array contains 8 arrays representing the 8 rows in the board, let's investigate a single row. 
+// Let's use each again, this time on the first row in the gameBoard. Let's go through and console.log each item in that row. 
+// What you'll see is an 
+
+// the first row of the gameBoard (the array at position 0 in the gameBoard array). 
   // Let's change every other square (say, the even ones) to a different color of your choosing. 
     // If you're not familiar with colors in JS, you can do this in three main ways: through rgb values, hex values (the way we've done it right now), or just typing in a color name like 'orange'
   // Now let's do the same thing using map. 
@@ -97,6 +102,8 @@ $(document).ready(function() {
 // When a user clicks on a square, the code will try to run a function on the global scope called 'clickHandler'. 
 // Create a function called clickHandler, and make sure it's accessible in the global scope
 // This funnction will be invoked with the indices of the square clicked on. For example, if the user clicked on the square in the top-left corner of the board, the clickHandler will be invoked like so: clickHandler([0,0]);
+
+// TODO: refactor gamePieces on each squareObj to be just a single property, not an array. 
   
   var collisionCount = 0;
 
@@ -112,7 +119,10 @@ $(document).ready(function() {
     console.log(gameBoard[row][column]);
     // console.log('position inside clickHandler!' + positionArr);
   };
-  gameBoard[0][0].gamePieces[0].imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
+  // gameBoard[row][column] will get you the squareObj at that position in the gameBoard. So gameBoard[2][6] will point to the squareObj on row 3 column 7. Quick review on how this works: JS chains operators together, the results of each one being passed to the next operation. So first we're accessing the thing at position 2 in our gameBoard when we say gameBoard[2]. Then, within that thing (which is an array representing a row), we're asking for the thing at the 6th position (which is going to be a squareObj). 
+  // We could chain this together even more. Explain with your pair each individual operation that's going on when we say:
+  gameBoard[3][5].gamePieces[0].imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
+
 
   renderGameBoard(gameBoard);
 
