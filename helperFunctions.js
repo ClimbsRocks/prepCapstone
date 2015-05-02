@@ -40,7 +40,7 @@ var renderGameBoard = function(gameBoard) {
   var browserSize = Math.min($(window).height(), $(window).width());
   $('.gameBoard').width(browserSize - 110);
   // then we leave some room around the edges (200 pixels), and divide by the number of squares to find how large the squares should be to fill that space perfectly.
-  var squareSize = (browserSize- 110) / boardSize;
+  var squareSize = (browserSize- 110) / boardSize - 2;
   gameBoard.forEach(function(rowArr, rowIndex) {
     rowArr.forEach(function(squareObj, columnIndex) {
       // Here we are creating the HTML that will be rendered to the DOM for each square. 
@@ -97,7 +97,7 @@ var makePiece = function(gameBoard, initialPosition, pieceType, playerBelongsTo)
     movementDescription: 'use words to describe how this piece moves so your users can understand what their options are',
     collisionDescription: 'use words to explain what happens when this piece collides with another',
     name: pieceName,
-    typeoOfPiece: '',
+    typeOfPiece: pieceType,
     imageURL: '',
     playerBelongsTo: playerBelongsTo  // if you have a game with two (or more?!) players playing against each other, you'll want to specify which player this piece belongs to
 
