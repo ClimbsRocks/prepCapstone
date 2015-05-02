@@ -13,19 +13,40 @@ $(document).ready(function() {
 
 // Let's start off by getting used to the gameBoard and how this project is structured.
 
+var gameBoard = makeGameBoard(8);
+
+// When in doubt, always console.log whatever it is you're working with to investigate it more. Try that now with gameBoard to figure it out!
+console.log('our gameBoard is: ', gameBoard);
+
 // gameBoard is an array of arrays (an array that is filled with other arrays). Let's start by using each to iterate through the gameBoard array, console.logging each item inside the gameBoard array. You should see 8 arrays, each of length 8, logged to your console. Each array here represents a row. 
+_.each(gameBoard, function(item) {
+  console.log('every individual item being passed to each inside our gameBoard:', item);
+});
 // Ok, now that we see the gameBoard array contains 8 arrays representing the 8 rows in the board, let's investigate a single row. 
-// Let's use each again, this time on the first row in the gameBoard. Let's go through and console.log each item in that row. 
+// Let's use each again, this time invoking it with the first row in the gameBoard. Let's go through and console.log each item in that row. 
+_.each(gameBoard[0], function(item) {
+  console.log('each item in our gameBoards first row', item);
+});
 // What you'll see is 8 different objects logged to your console. Click into them to explore them more. 
 // Each of these objects represents a square. We have many different pieces of information we want to store about each square: what color it is, what position it is on the board, what gamePiece is at that position, etc. An object is a perfect way to store information about all these different properties associated with that square. 
+
+// gameBoard[row][column] will get you the squareObj at that position in the gameBoard. So gameBoard[2][6] will point to the squareObj on row 3 column 7. Quick review on how this works: JS chains operators together, the results of each one being passed to the next operation. So first we're accessing the thing at position 2 in our gameBoard when we say gameBoard[2]. Then, within that thing (which is an array representing a row), we're asking for the thing at the 6th position (which is going to be a squareObj). 
+// We could chain this together even more. Explain with your pair each individual operation that's going on when we say:
+gameBoard[3][5].color = 'black';
 
 
 // Alright! Now that we've figured out the gameBoard is an array of arrays, and that each square is just an object with some useful properties on it, let's start using our functional programming tools to make some changes to the board. 
 // Use each to iterate through the first row of the gameBoard (the array at position 0 in the gameBoard array). 
-  // Let's change every other square (say, the even ones) to a different color of your choosing. 
+  // Let's change every square to a different color of your choosing. 
+  _.each(gameBoard[0], function(item) {
+    item.color = 'orange';
+  });
     // If you're not familiar with colors in JS, you can do this in three main ways: through rgb values, hex values (the way we've done it right now), or just typing in a color name like 'orange'
-  // Now let's do the same thing using map. 
-    // We only changed every other square in that first row using each. So now let's change the odd squares to a new color so that all the squares have been changed. 
+  // Now let's do the same thing using map on the second row of our gameBoard
+  gameBoard[1] = _.map(gameBoard[1], function(item) {
+    item.color = 'blue';
+    return item;
+  });
     // What's the key difference between map and each? map returns an array, whereas each only has side effects, and does not return anything. 
     // Think through how we'd use each and map in different ways to accomplish the same goal. 
     // The key part here is how to leverage what either of them does (side effects, vs. a returned array). 
@@ -34,12 +55,37 @@ $(document).ready(function() {
       // Use an outer for loop to iterate through all of the rows in the gameBoard. 
       // Use an inner for loop to iterate through all the objects in a given row. 
         // While iterating through each object, change it's color property to 'orange' (or any other color of your choosing).
+        for(var i = 0; i < gameBoard.length; i++ ) {
+          for(var j = 0; j < gameBoard[i].length; j++) {
+            gameBoard[i][j].color = 'purple';
+          }
+        }
     // Great! Now that we've changed the color of each square to orange using for loops, let's transition this over to functional programming.
       // First, replace the inner for loop with an each statement that changes the color of each square to blue. Be sure to write a new each statement for this- don't just copy and paste the one you've written up above. We want you to get as much practice typing these out as possible!
+      for (var i = 0; i < gameBoard.length; i++ ) {
+        _.each(gameBoard[i], function(item) {
+          item.color = 'green';
+        });
+      }
       // Now that all the squares are changed to blue, let's replace the outer for loop with an each statement. Again, write a whole new one from scratch here. 
         // Change the color in the inner each statement to green, just to make sure everything's working. 
-    // Awesome! Hopefully at this point you've fully grasped that each is just another way of executing some code on each item in a collection. 
-    
+        // Remember, when in doubt, console.log the item you're working with to make sure you understand what's going on at each step!
+        // This is where naming your variables something descriptive makes a ton of sense. What is the thing that is being passed into the callback function on either each statement? Could you name it something that reflects exactly what's being passed in?
+        _.each(gameBoard, function(row) {
+          _.each(row, function(squareObj) {
+            squareObj.color = 'black';
+          });
+        });
+    // Awesome! Hopefully at this point you've fully grasped that each is just another way of executing some code on each item in a collection. And that you can make that code do whatever you want it to. 
+      // Let's replace our inner each loop with map, changing the colors of all the squares to purple this time. 
+      _.each(gameBoard, function(row) {
+        row = _.map(row, function(squareObj) {
+          squareObj.color = 'red';
+          return squareObj;
+        });
+      });
+
+
 
 
 
@@ -47,13 +93,37 @@ $(document).ready(function() {
   // In programming, it's a super useful skill to get used to just looking at the interfaces of things, and not worrying too much about how they work inside. If you try to figure out how everything works inside you'll find yourself descending through many deep, dark, and scary caves that oftentimes don't expand your programming knowledge very much. Try checking out the interface for makePiece (what parameters it takes and what's returned from it).
   // TODO: move interfaces speech to be for gameBoard?? In the introductory video, and in the in-person introduction. 
   // Let's add a new piece (name it anything you want. babyDino is my current favorite, but I'm sure you'll have fun coming up with your own favorite gamePieces!). Try invoking makePiece with the right arguments and make sure it worked by opening up your browser.  
+  makePiece(gameBoard, [3,5], 'babyDino');
+  // gameBoard[3][5].gamePiece.imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
+
   // Now that we've added a piece to the board, let's use that piece to practice filter. 
-  // Invoke filter on the row that you just added the gamePiece to. See if you can use it to return an array of only the square(s) that have a gamePiece on them. Do you remember where we're storing gamePieces on each squareObj? TODO: hint them with console.log
-  // Now try adding gamePieces to a couple of different rows throughout the board. Can you use each, in conjunction with filter, to find all the squares on the whole board that have a piece on them? 
+  // Invoke filter on the row that you just added the gamePiece to. See if you can use it to return an array of only the square(s) that have a gamePiece on them. Do you remember where we're storing gamePieces on each squareObj? 
+    var filteredResult = _.filter(gameBoard[3], function(item) {
+      return item.gamePiece;
+    });
+    console.log(filteredResult);
+  // Now try adding gamePieces to a couple of different rows throughout the board. 
+  makePiece(gameBoard, [3,6], 'babyDino');
+  makePiece(gameBoard, [3,2], 'babyDino');
+  makePiece(gameBoard, [5,6], 'babyDino');
+  makePiece(gameBoard, [5,2], 'babyDino');
+
+  // Can you use each, in conjunction with filter, to find all the squares on the whole board that have a piece on them? 
+    // Hint: Remember that each can't return anything, but it can have side effects (that is, modify variables it has scope access to).
+    var results = [];
+    _.each(gameBoard, function(row) {
+      results.push(
+        _.filter(row, function(squareObj) {
+          return squareObj.gamePiece;
+        })
+      );
+    });
+    console.log('results after filter:', results);
   // Great! At this point, we should have an array that is filled with nested arrays. Each object in those nested arrays should be a square that has a gamePiece on it. TODO: Give them an example of what the result array looks like. 
+    // That should look something like: "results after filter: [Array[0], Array[0], Array[0], Array[3], Array[0], Array[2], Array[0], Array[0]]" for a gameBoard that has three gamePieces on row 3 and two game pieces on row 5.
   // Having that information scattered throughout a bunch of different arrays seems messy. You can probably think of plenty of cases where we'd want to have all that information collected into a single array. 
   // Wait, that's starting to sound like reduce! We're taking a collection of a bunch of things, and reducing it down to a single thing. 
-    // Can you think of a way we could use reduce to reduce an array filled with arrays to a single array just filled with all the values contained in each subarray? 
+    // Can you think of a way we could reduce an array filled with arrays to a single array just filled with all the values contained in each subarray? 
     // Hint: what if we tried passing in an empty array as the starting value?
     // If it's easier to visualize, practice on this: [[1,2,3],[4],[5,6,7,8],[9,10]]. We can use reduce to simplify that down to a single value of [1,2,3,4,5,6,7,8,9,10].
     // TODO: Add in mini curriculum on using reduce- give them some practice on it. start with summing, then build up to the array of arrays example. 
@@ -121,10 +191,6 @@ $(document).ready(function() {
   
   var collisionCount = 0;
 
-  var gameBoard = makeGameBoard(8);
-  renderGameBoard(gameBoard);
-
-  makePiece(gameBoard, [3,5], 'testPiece');
 
 // TODO: Make sure they know to put clickHandler on the global scope. 
   window.clickHandler = function(positionArr) {
@@ -133,13 +199,11 @@ $(document).ready(function() {
     console.log(gameBoard[row][column]);
     // console.log('position inside clickHandler!' + positionArr);
   };
-  console.log(gameBoard);
   // gameBoard[row][column] will get you the squareObj at that position in the gameBoard. So gameBoard[2][6] will point to the squareObj on row 3 column 7. Quick review on how this works: JS chains operators together, the results of each one being passed to the next operation. So first we're accessing the thing at position 2 in our gameBoard when we say gameBoard[2]. Then, within that thing (which is an array representing a row), we're asking for the thing at the 6th position (which is going to be a squareObj). 
   // We could chain this together even more. Explain with your pair each individual operation that's going on when we say:
-  gameBoard[3][5].gamePiece.imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
 
 
-  renderGameBoard(gameBoard);
+  renderGameBoard(gameBoard); // DON'T REMOVE THIS LINE. This line makes sure that any changes you make to your JS code will actually show up on the screen. Try commenting it out and see how your changes are no longer rendered to the browser. 
 
 // STUDENT: Use filter to iterate through all the positions on the board, grabbing each gamePiece object
   // Then, use map to add a link to an image to the appropriate property on each of those objects. 
