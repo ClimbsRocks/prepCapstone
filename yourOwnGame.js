@@ -16,17 +16,31 @@ $(document).ready(function() {
 // gameBoard is an array of arrays (an array that is filled with other arrays). Let's start by using each to iterate through the gameBoard array, console.logging each item inside the gameBoard array. You should see 8 arrays, each of length 8, logged to your console. Each array here represents a row. 
 // Ok, now that we see the gameBoard array contains 8 arrays representing the 8 rows in the board, let's investigate a single row. 
 // Let's use each again, this time on the first row in the gameBoard. Let's go through and console.log each item in that row. 
-// What you'll see is an 
+// What you'll see is 8 different objects logged to your console. Click into them to explore them more. 
+// Each of these objects represents a square. We have many different pieces of information we want to store about each square: what color it is, what position it is on the board, what gamePiece is at that position, etc. An object is a perfect way to store information about all these different properties associated with that square. 
 
-// the first row of the gameBoard (the array at position 0 in the gameBoard array). 
+
+// Alright! Now that we've figured out the gameBoard is an array of arrays, and that each square is just an object with some useful properties on it, let's start using our functional programming tools to make some changes to the board. 
+// Use each to iterate through the first row of the gameBoard (the array at position 0 in the gameBoard array). 
   // Let's change every other square (say, the even ones) to a different color of your choosing. 
     // If you're not familiar with colors in JS, you can do this in three main ways: through rgb values, hex values (the way we've done it right now), or just typing in a color name like 'orange'
   // Now let's do the same thing using map. 
     // We only changed every other square in that first row using each. So now let's change the odd squares to a new color so that all the squares have been changed. 
-    // What's the key difference between map and each? ANSWER: map returns an array, whereas each only has side effects, and does not return anything. 
-    // Think through how we'd use each and map in different ways from each other to accomplish the same goal. 
+    // What's the key difference between map and each? map returns an array, whereas each only has side effects, and does not return anything. 
+    // Think through how we'd use each and map in different ways to accomplish the same goal. 
+    // The key part here is how to leverage what either of them does (side effects, vs. a returned array). 
   // Now that we've figured out how to use map and each to change the colors in a row, let's nest them inside of each to change all of the rows!
-    // Try doing this in two different ways, one with map nested inside of each, and one with an each statement nested inside of the outer each. 
+    // Let's warm up to this by doing it the way we would before we knew how to program functionally: using nested for loops. 
+      // Use an outer for loop to iterate through all of the rows in the gameBoard. 
+      // Use an inner for loop to iterate through all the objects in a given row. 
+        // While iterating through each object, change it's color property to 'orange' (or any other color of your choosing).
+    // Great! Now that we've changed the color of each square to orange using for loops, let's transition this over to functional programming.
+      // First, replace the inner for loop with an each statement that changes the color of each square to blue. Be sure to write a new each statement for this- don't just copy and paste the one you've written up above. We want you to get as much practice typing these out as possible!
+      // Now that all the squares are changed to blue, let's replace the outer for loop with an each statement. Again, write a whole new one from scratch here. 
+        // Change the color in the inner each statement to green, just to make sure everything's working. 
+    // Awesome! Hopefully at this point you've fully grasped that each is just another way of executing some code on each item in a collection. 
+    
+
 
 
 // Awesome! Now we've got a decent understanding of the gameBoard. Now let's test out the makePiece function. 
@@ -110,7 +124,7 @@ $(document).ready(function() {
   var gameBoard = makeGameBoard(8);
   renderGameBoard(gameBoard);
 
-  makePiece(gameBoard, [0,0], 'testPiece');
+  makePiece(gameBoard, [3,5], 'testPiece');
 
 // TODO: Make sure they know to put clickHandler on the global scope. 
   window.clickHandler = function(positionArr) {
@@ -119,9 +133,10 @@ $(document).ready(function() {
     console.log(gameBoard[row][column]);
     // console.log('position inside clickHandler!' + positionArr);
   };
+  console.log(gameBoard);
   // gameBoard[row][column] will get you the squareObj at that position in the gameBoard. So gameBoard[2][6] will point to the squareObj on row 3 column 7. Quick review on how this works: JS chains operators together, the results of each one being passed to the next operation. So first we're accessing the thing at position 2 in our gameBoard when we say gameBoard[2]. Then, within that thing (which is an array representing a row), we're asking for the thing at the 6th position (which is going to be a squareObj). 
   // We could chain this together even more. Explain with your pair each individual operation that's going on when we say:
-  gameBoard[3][5].gamePieces[0].imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
+  gameBoard[3][5].gamePiece.imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
 
 
   renderGameBoard(gameBoard);
