@@ -226,18 +226,34 @@ gameBoard[3][5].color = 'black';
     // D. At this point, you should have an array of subarrays. Each of those subarrays will contain the positions of the squares in a given row that have a gamePiece on them. Now, let's use reduce to reduce this down to a single array that contains the position of all the squares we're interested in. 
     // E. Whew! You've now used all four of the canonical functional programming functions! Great job getting here. Now we have a single array that holds the position of all the gamePieces. Let's use each to go through that array and do something for each item in that array. Except we're going to use it in a slightly creative way (yay for creativity in programming! And here my momma thought I'd never be an artist.). We're just going to use each item in the positionsArray as information to go find the gamePiece at that position. Then, once we have those gamePieces, let's add an imageURL to each gamePiece so we can see the gamePieces on the board. 
       // imageURL is just a property on each object. All you need to do is add a link to an image. If you haven't done this before, you can right click on any image online, and get a link to that image. Set the imageURL property equal to that string, and voila! Your image will appear on the screen. 
-// 5. 
-
-//use filter to grab all pieces of the same type, and then use map to iterate through them and set their movement descriptions
-//use map to iterate through all objects of the same type and set their collision descriptions
-//use map to iterate through all pieces for each side and randomly 'gift' half of each player's objects to the other player. Call this command 'The Great Equalizer'
+// 5. Use filter to grab all gamePieces of the same type, and then use each to iterate through them and set their movement descriptions. Don't worry about building out the logic of how you'd make them move- for now just have fun coming up with moves you'd want your various pieces to do. For example, maybe scaredKitty goes and hides in the corner, and impetuousDragon frequently flies off and leaves the board entirely. 
+// 6. Use reduce to create an object that has a tally of all our gamePieces. For example, the result might be: 
+// { babyDino: 3,
+//   impetutousDragon: 2,
+//   scaredKitty: 4,
+//   hobblingPirate:8,
+//   cuddlePuddlers:12 }
+  // You should be able to do this by just using reduce inside of another reduce if you're feeling ambitious!
+// 7. When a user clicks on a square, the app will invoke a function on the global scope called 'clickHandler'. 
+  // This funnction will be invoked with the indices of the square clicked on. For example, if the user clicked on the square in the top-left corner of the board, the clickHandler will be invoked like so: clickHandler([0,0]);
+  // TODO: Uncomment the lines below and see what happens when you click on a square on the board!
+    // window.clickHandler = function(positionArr) {
+    //   var row = positionArr[0];
+    //   var column = positionArr[1];
+    //   console.log(gameBoard[row][column]);
+    // };
+  // Write some logic inside of clickHandler that highlights all the squares in the row that has been clicked on by turning them pink. 
+  // Now expand this to include all the squares in the same column as the square that was clicked on. So if the user clicks on a square in row 3, column 4, all squares in row 3 and all squares in column 4 should become pink. 
+// 8. Now let's abstract out this logic and put it into a function on each of our gamePieces. 
+  // Create a function on each gamePiece called highlightSquares. Remove that functionality from our clickHandler function and put it into the highlightSquares function on each object. 
+  // Now, inside clickHandler, let's see if there is a gamePiece on the square that was clicked on. If there is, invoke highlightSquares as a method on that object. 
 
 // Ideas:
-  // Use reduce to create a tally of all of our gamePieces. Does this tally look identical to the totalPieceCount object?
-  // Use filter to go through an objects array and only return objects of a particular type. 
-  // Use map to change properties on each object (description, imageURL, collisionDescription, etc.)
+  // collisionCount
   // Use map to advance all pieces one space closer towards the center (if their row is more than half, move their row down by one, if their row is less than half, increase their row by one).
   // Use filter to find only those squares that have a collision. 
+  //use map to iterate through all objects of the same type and set their collision descriptions
+  //use map to iterate through all pieces for each side and randomly 'gift' half of each player's objects to the other player. Call this command 'The Great Equalizer'
   // What are other easy ways of easing them into this? 
   // Use map to change the color of all squares a piece is eligible to move to. 
     // Store this as a method on each gamePiece object, so you can just call gamePiece.highlightSquares() no matter which piece it is
@@ -259,20 +275,6 @@ gameBoard[3][5].color = 'black';
 
 
 
-// When a user clicks on a square, the code will try to run a function on the global scope called 'clickHandler'. 
-// Create a function called clickHandler, and make sure it's accessible in the global scope
-// This funnction will be invoked with the indices of the square clicked on. For example, if the user clicked on the square in the top-left corner of the board, the clickHandler will be invoked like so: clickHandler([0,0]);
-
-  
-  var collisionCount = 0;
-
-
-// TODO: Make sure they know to put clickHandler on the global scope. 
-  window.clickHandler = function(positionArr) {
-    var row = positionArr[0];
-    var column = positionArr[1];
-    console.log(gameBoard[row][column]);
-  };
   // gameBoard[row][column] will get you the squareObj at that position in the gameBoard. So gameBoard[2][6] will point to the squareObj on row 3 column 7. Quick review on how this works: JS chains operators together, the results of each one being passed to the next operation. So first we're accessing the thing at position 2 in our gameBoard when we say gameBoard[2]. Then, within that thing (which is an array representing a row), we're asking for the thing at the 6th position (which is going to be a squareObj). 
   // We could chain this together even more. Explain with your pair each individual operation that's going on when we say:
 
