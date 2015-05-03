@@ -121,12 +121,8 @@ gameBoard[3][5].color = 'black';
     console.log('results after filter:', results);
   // Great! At this point, we should have an array that is filled with nested arrays. Each object in those nested arrays should be a square that has a gamePiece on it. TODO: Give them an example of what the result array looks like. 
     // That should look something like: "results after filter: [Array[0], Array[0], Array[0], Array[3], Array[0], Array[2], Array[0], Array[0]]" for a gameBoard that has three gamePieces on row 3 and two game pieces on row 5.
-  // Having that information scattered throughout a bunch of different arrays seems messy. You can probably think of plenty of cases where we'd want to have all that information collected into a single array. 
-  // Wait, that's starting to sound like reduce! We're taking a collection of a bunch of things, and reducing it down to a single thing. 
-    // Can you think of a way we could reduce an array filled with arrays to a single array just filled with all the values contained in each subarray? 
-    // Hint: what if we tried passing in an empty array as the starting value?
-    // If it's easier to visualize, practice on this: [[1,2,3],[4],[5,6,7,8],[9,10]]. We can use reduce to simplify that down to a single value of [1,2,3,4,5,6,7,8,9,10].
-    // TODO: Add in mini curriculum on using reduce- give them some practice on it. start with summing, then build up to the array of arrays example. 
+ 
+// We're now going to go on a mini-sprint covering reduce, the last critical functional programming tool. Understanding reduce will let us take this messy nested array we have, and turn it into a single, flattened array. 
 
 //Reduce mini-sprint:
 // You'll notice that oftentimes what you're doing with for loops and each statements is reducing an entire collection down to a single answer. This is such a common pattern that there's a canonical functional programming function called reduce. Let's explore what reduce does, and how it boils a collection down to a single answer!
@@ -194,12 +190,21 @@ gameBoard[3][5].color = 'black';
         return previous && current; //return true ONLY IF both the current value is true, and the result of all previous iterations is true too. return false if either the current or the previous is false. 
       }, true); //start with true. What happens if we start with false? 
     // Now let's put this to use another way. 
-      var bouncersNightmare: {ashley: 22, bobby:23, camila:25, gabriela:22, ben:21, miranda:24, jayden:22, sofia:23, matias:21, hannah:21, makayla:23, justin: 22, isaiah:25, caleb:22, chloe:24};
-      // Let's make this poor bouncer's job a bit easier by reducing this collection down to a single true or false value of whether everyone in this group is over 21 or not. 
-        // Use reduce to turn bouncersNightmare into a single boolean value certifying whether everyone in the collection is over 21. 
+      var bouncersNightmare= {ashley: 22, bobby:23, camila:25, gabriela:22, ben:21, miranda:24, jayden:22, sofia:23, matias:21, hannah:21, makayla:23, justin:22, isaiah:25, caleb:22, chloe:24};
+      // Let's make this poor bouncer's job a bit easier by reducing this collection down to a single true or false value of whether everyone in this group is at least 21 or not. 
+        // Use reduce to turn bouncersNightmare into a single boolean value certifying whether everyone in the collection is at least 21. 
+        // Test it out by switching one of the ages to be less than 21. Does your function return false now? 
+  // Awesome job! You've now covered several different uses of reduce. There's a bit of a running joke amongst programmers that any problem can be solved using reduce. With these tools in your belt, you're going to be well-suited to do just that! 
 
 
+ // Let's return to our gameBoard now. Step back up to just before we went on the reduce mini-sprint to remind yourself what we were doing. 
+ // Remember that we'd just used each and filter to find all the gamePieces on the board: "results after filter: [Array[0], Array[0], Array[0], Array[3], Array[0], Array[2], Array[0], Array[0]]" for a gameBoard that has three gamePieces on row 3 and two game pieces on row 5.
+ // Having that information scattered throughout a bunch of different arrays seems messy. You can probably think of plenty of cases where we'd want to have all that information collected into a single array. 
+  // Wait, that's starting to sound like reduce! We're taking a collection of a bunch of things, and reducing it down to a single thing. 
+    // Can you think of a way we could reduce an array filled with arrays to a single array just filled with all the values contained in each subarray? 
+    // Hint: what if we tried passing in an empty array as the starting value?
 
+// This ends our intro to the capstone project. By this point you should be pretty familiar with the gameBoard, the makePiece function, and all four of the main functional programming tools (each, map, filter, and reduce). From here on out, we're intentionally going to give you less guidance. One of the key skills to be a successful engineer is autonomy in accomplishing tasks that are given to you. We want you to get used to that feeling with these upcoming exercises. 
 
 
 // INTERNAL: explicitly calling these arrays 'ToAdd' should prevent any possible confusion from students trying to store the pieces into these arrays, since we only want them permanently stored in the gameBoard. 
@@ -209,19 +214,18 @@ gameBoard[3][5].color = 'black';
 
 // 3. Now use two (nested) each loops to add these pieces to the board. 
   // Question1: How can you make sure each piece ends up on a different square on the board? 
-  // Question2: What happens when you get to the end of a line? How do you know to start on the first position of the next line? Think if you can use the modulus "%" operator for this TODO: link to modulus. we don't cover it much. 
+  // Question2: What happens when you get to the end of a line? How do you know to start on the first position of the next line? Think if you can use the modulus "%" operator for this. If you're not familiar with the modulus operator, it gives you the remainder from dividing two numbers. So if we divide 12 by 8, that gives us a remainder of 4 (we have 4 left over after taking 8 out of 12). As always, feel free to google around for more information!
   // Question3: How can we line these pieces up on opposite sides of the board?
   // BEST PRACTICE: Pseudocode the specific steps you'll need to accomplish. This takes a seemingly large and complex task and breaks it down into solvable chunks. 
 
 // 4. Great! Now we have two opposing armies (or two groups of friends just trying to gather together on the same point?!) arranged on the board. Now it's time to make them look intimidating or pretty for their battle or cuddleFest. 
   // Let's use a couple of our functional programming skills here. We'll chain them together, slowly building up to do some fairly complex operations. 
-    // A. Use filter to iterate through a single row, returning an arr of the squareObj in that row that have (at least) one gamePiece on them. 
+    // A. Use filter to iterate through a single row, returning an arr of the squareObj in that row that have a gamePiece on them. 
     // B. Use map to change each of the objects in the array returned from filter to an array of their positions. Positions are a property saved as a property on each object. Console.log each object to check it out!
     // C. Use each to repeat this process on each row in your gameBoard
-    // D. TODO: Narrate what they have at each step. At this point, you should have an array of subarrays. Each of those subarrays will contain the positions of the squares in a given row that have a gamePiece on them. Now, let's use reduce to reduce this down to a single array that contains the position of all the squares we're interested in. 
-    // E. Whew! You've now used all four of the canonical functional programming functions! Great job getting here. Now we have a single array that holds the position of all the gamePieces. Let's use each to go through that array and do something for each item in that array. Except we're going to use it in a slightly creative way (yay for creativity in programming! And here my momma thought I'd never be an artist.). We're just going to use each item in the positionsArray as information to go find the gamePiece(s) at that position. Then, once we have those gamePieces, let's add an imageURL to each gamePiece so we can see the gamePieces on the board. 
-      // imageURL is just a property on each object. All you need to do is add a link to an image. If you haven't done this before, you can right click on any image online, and get a link to that image. set the imageURL property equal to that string, and voila! Your image will appear on the screen. 
-      // Remember, we need to render everything to the DOM after we make changes, otherwise our updates will never be seen by the user!
+    // D. At this point, you should have an array of subarrays. Each of those subarrays will contain the positions of the squares in a given row that have a gamePiece on them. Now, let's use reduce to reduce this down to a single array that contains the position of all the squares we're interested in. 
+    // E. Whew! You've now used all four of the canonical functional programming functions! Great job getting here. Now we have a single array that holds the position of all the gamePieces. Let's use each to go through that array and do something for each item in that array. Except we're going to use it in a slightly creative way (yay for creativity in programming! And here my momma thought I'd never be an artist.). We're just going to use each item in the positionsArray as information to go find the gamePiece at that position. Then, once we have those gamePieces, let's add an imageURL to each gamePiece so we can see the gamePieces on the board. 
+      // imageURL is just a property on each object. All you need to do is add a link to an image. If you haven't done this before, you can right click on any image online, and get a link to that image. Set the imageURL property equal to that string, and voila! Your image will appear on the screen. 
 // 5. 
 
 //use filter to grab all pieces of the same type, and then use map to iterate through them and set their movement descriptions
@@ -254,13 +258,11 @@ gameBoard[3][5].color = 'black';
     // If it is not a valid move, alert the user that this is not a valid move. Give them the chance to cancel (deactivate) this piece by clicking on Ok or Cancel
 
 
-// NOTE: there are two separate things going on: you making a change to the javascript code/logic behind the app, and rendering that new "state" to the DOM (what appears on the screen). In order to see any changes you make rendered to the screen, you need to call renderGameBoard() and pass in the updated gameBoard as an argument. 
 
 // When a user clicks on a square, the code will try to run a function on the global scope called 'clickHandler'. 
 // Create a function called clickHandler, and make sure it's accessible in the global scope
 // This funnction will be invoked with the indices of the square clicked on. For example, if the user clicked on the square in the top-left corner of the board, the clickHandler will be invoked like so: clickHandler([0,0]);
 
-// TODO: refactor gamePieces on each squareObj to be just a single property, not an array. 
   
   var collisionCount = 0;
 
@@ -270,16 +272,12 @@ gameBoard[3][5].color = 'black';
     var row = positionArr[0];
     var column = positionArr[1];
     console.log(gameBoard[row][column]);
-    // console.log('position inside clickHandler!' + positionArr);
   };
   // gameBoard[row][column] will get you the squareObj at that position in the gameBoard. So gameBoard[2][6] will point to the squareObj on row 3 column 7. Quick review on how this works: JS chains operators together, the results of each one being passed to the next operation. So first we're accessing the thing at position 2 in our gameBoard when we say gameBoard[2]. Then, within that thing (which is an array representing a row), we're asking for the thing at the 6th position (which is going to be a squareObj). 
   // We could chain this together even more. Explain with your pair each individual operation that's going on when we say:
 
 
-  renderGameBoard(gameBoard); // DON'T REMOVE THIS LINE. This line makes sure that any changes you make to your JS code will actually show up on the screen. Try commenting it out and see how your changes are no longer rendered to the browser. 
-
-// STUDENT: Use filter to iterate through all the positions on the board, grabbing each gamePiece object
-  // Then, use map to add a link to an image to the appropriate property on each of those objects. 
-
+  // NOTE: there are two separate things going on: you making a change to the javascript code/logic behind the app, and rendering that new "state" to the DOM (what appears on the screen). In order to see any changes you make rendered to the screen, you need to call renderGameBoard() and pass in the updated gameBoard as an argument. 
+  renderGameBoard(gameBoard); // DON'T REMOVE THIS LINE. This line makes sure that any changes you make to your JS code will actually show up on the screen. Try commenting it out and see how the gameBoard is no longer rendered to the browser, even though your logic is clearly still running, as seen by your console.logs. 
 
 });
