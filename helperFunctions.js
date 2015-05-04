@@ -52,7 +52,6 @@ var renderGameBoard = function(gameBoard) {
       // To keep track of which square this is (necessary for figuring out which square was clicked on later), we set a data "property" on each square as well. 
       // Inside of each div, we can put whatever text we want! Or none at all- it doesn't care. So we put in the text from the object at that position, if one exists. 
       // OPTIONAL: You can change what gets rendered for each square. Want to display the name differently? Feel free to modify the code below to do what you want!
-      // TODO: refactor now that we're storing gamePieces in an array
       if(squareObj.gamePiece && squareObj.gamePiece.imageURL) {
         var squareHtml = '<img src="' + squareObj.gamePiece.imageURL + '" class="gameSquare" style="height:' + squareSize + 'px; width:' + squareSize + 'px" data-position="[' + rowIndex + ',' + columnIndex + ']">'
       } else {
@@ -63,17 +62,15 @@ var renderGameBoard = function(gameBoard) {
         var squareHtml = '<div class="gameSquare" style="background-color:' + squareObj.color + '; height:' + squareSize + 'px; width:' + squareSize + 'px" data-position="[' + rowIndex + ',' + columnIndex + ']">' + squareText + '</div>';
       }
       $('.gameBoard').append(squareHtml);
-      // TODO: consider resizing text to fit inside the box. This site has a useful function: http://www.metaltoad.com/blog/resizing-text-fit-container
     });
   });
 
-  // NOTE: we attach the event listeners AFTER we have appended the elements to the DOM. You will definitely get tripped up by this at some point in your career :)
+  // NOTE: we attach the event listeners AFTER we have attached the elements to the DOM. You will definitely get tripped up by this at some point in your career :)
   $(document).on('click', '.gameSquare', function() {
     console.log($(this));
     clickHandler($(this).data('position'));
   });
 }
-// renderGameBoard(gameBoard);
 
 //here we're going to keep track of the count of all pieces added to our gameBoard. 
 var totalPieceCount = {};
@@ -100,7 +97,6 @@ var makePiece = function(gameBoard, initialPosition, pieceType, playerBelongsTo)
     typeOfPiece: pieceType,
     imageURL: '',
     playerBelongsTo: playerBelongsTo  // if you have a game with two (or more?!) players playing against each other, you'll want to specify which player this piece belongs to
-
   }
 
   var row = initialPosition[0];
