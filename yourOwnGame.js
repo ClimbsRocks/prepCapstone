@@ -6,10 +6,10 @@
 $(document).ready(function() {
 // NOTE: it is an explicit goal of this project to get you familiar with functional programming. Functional programming is a whole new way of thinking that requires some practice and experience to feel natural. These prompts are designed to give you experience using functional programming, so go through them as they're written, even if you can think of other ways of doing them without using functional programming. 
 
-// We've created some helper functions FINISH THIS- explain the helperFunctions we've created, how to use each one, and that they're just to handle the rendering so they get to focus on the JS logic. GOAL: make them feel like they own the repo, and that what we've built out for them already is trivial. 
+// We've created a sparse handful of helper functions in helperFunctions.js to handle making things appear on the screen. If you're interested in understanding it, feel free to look at that file! 
+// In programming, it's a super useful skill to get used to just looking at the interfaces of things, and not worrying too much about how they work inside. If you try to figure out how everything works inside you'll find yourself descending through many deep, dark, and scary caves that oftentimes don't expand your programming knowledge very much. As much as possible, try to look at only the interfaces (what arguments a function takes, and what it returns). I'd strongly recommend that you take this approach with makeGameBoard and renderGameBoard. 
 
 // TODO: talk about debugging again. Make that an obvious goal of this. 
-
 
 // Let's start off by getting used to the gameBoard and how this project is structured.
 
@@ -90,8 +90,6 @@ gameBoard[3][5].color = 'black';
 
 
 // Awesome! Now we've got a decent understanding of the gameBoard. Now let's test out the makePiece function. 
-  // In programming, it's a super useful skill to get used to just looking at the interfaces of things, and not worrying too much about how they work inside. If you try to figure out how everything works inside you'll find yourself descending through many deep, dark, and scary caves that oftentimes don't expand your programming knowledge very much. Try checking out the interface for makePiece (what parameters it takes and what's returned from it).
-  // TODO: move interfaces speech to be for gameBoard?? In the introductory video, and in the in-person introduction. 
   // Let's add a new piece (name it anything you want. babyDino is my current favorite, but I'm sure you'll have fun coming up with your own favorite gamePieces!). Try invoking makePiece with the right arguments and make sure it worked by opening up your browser.  
   makePiece(gameBoard, [3,5], 'babyDino');
   // gameBoard[3][5].gamePiece.imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
@@ -218,7 +216,7 @@ gameBoard[3][5].color = 'black';
   // Question3: How can we line these pieces up on opposite sides of the board?
   // BEST PRACTICE: Pseudocode the specific steps you'll need to accomplish. This takes a seemingly large and complex task and breaks it down into solvable chunks. 
 
-// 4. Great! Now we have two opposing armies (or two groups of friends just trying to gather together on the same point?!) arranged on the board. Now it's time to make them look intimidating or pretty for their battle or cuddleFest. 
+// 4. Great! Now we have two fierce opposing armies (or two groups of friends just trying to gather together on the same square for a group hug?!) arranged on the board. It's time to make them look intimidating or pretty for their impending battle or hugfest. 
   // Let's use a couple of our functional programming skills here. We'll chain them together, slowly building up to do some fairly complex operations. 
     // A. Use filter to iterate through a single row, returning an arr of the squareObj in that row that have a gamePiece on them. 
     // B. Use map to change each of the objects in the array returned from filter to an array of their positions. Positions are a property saved as a property on each object. Console.log each object to check it out!
@@ -232,7 +230,7 @@ gameBoard[3][5].color = 'black';
 //   impetutousDragon: 2,
 //   scaredKitty: 4,
 //   hobblingPirate:8,
-//   cuddlePuddlers:12 }
+//   groupHuggers:12 }
   // You should be able to do this by just using reduce inside of another reduce if you're feeling ambitious!
 // 7. When a user clicks on a square, the app will invoke a function on the global scope called 'clickHandler'. 
   // This funnction will be invoked with the indices of the square clicked on. For example, if the user clicked on the square in the top-left corner of the board, the clickHandler will be invoked like so: clickHandler([0,0]);
@@ -247,6 +245,9 @@ gameBoard[3][5].color = 'black';
 // 8. Now let's abstract out this logic and put it into a function on each of our gamePieces. 
   // Create a function on each gamePiece called highlightSquares. Remove that functionality from our clickHandler function and put it into the highlightSquares function on each object. 
   // Now, inside clickHandler, let's see if there is a gamePiece on the square that was clicked on. If there is, invoke highlightSquares as a method on that object. 
+// 9. Now that highlightSquares is a method on each gamePiece object, we can change what each object's movement pattern is. Go through and change the logic of which squares on the board are highlighted for each different type of piece. For our scaredKitten example, whose movement description is "Runs to a corner and hides", we would highlight only the four corner squares. 
+  // Each gamePiece of the same type should have the same highlightSquares functionality. 
+// 10. Now let's go through and undo highlightPieces. 
 
 // Ideas:
   // collisionCount
