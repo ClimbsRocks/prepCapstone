@@ -1,15 +1,10 @@
 // The $(document).ready(function() {}) just says "Wait to run the code inside here until after everything we need on the page has loaded."
 
-// TODO: MORE HANDHOLDING!!
-// TODO: Refactor to be just getting used to the gameboard. Use a bunch of functional stuff here. Change colors. Place different pieces on the different spaces. Highlight all the spaces in the same row as a piece. Now highlight all the spaces in the same column. Now diagonals?!
-
 $(document).ready(function() {
 // NOTE: it is an explicit goal of this project to get you familiar with functional programming. Functional programming is a whole new way of thinking that requires some practice and experience to feel natural. These prompts are designed to give you experience using functional programming, so go through them as they're written, even if you can think of other ways of doing them without using functional programming. 
 
 // We've created a sparse handful of helper functions in helperFunctions.js to handle making things appear on the screen. If you're interested in understanding it, feel free to look at that file! 
 // In programming, it's a super useful skill to get used to just looking at the interfaces of things, and not worrying too much about how they work inside. If you try to figure out how everything works inside you'll find yourself descending through many deep, dark, and scary caves that oftentimes don't expand your programming knowledge very much. As much as possible, try to look at only the interfaces (what arguments a function takes, and what it returns). I'd strongly recommend that you take this approach with makeGameBoard and renderGameBoard. 
-
-// TODO: talk about debugging again. Make that an obvious goal of this. 
 
 // Let's start off by getting used to the gameBoard and how this project is structured.
 
@@ -17,6 +12,12 @@ var gameBoard = makeGameBoard(8);
 
 // When in doubt, always console.log whatever it is you're working with to investigate it more. Try that now with gameBoard to figure it out!
 console.log('our gameBoard is: ', gameBoard);
+// One of the things you'll need to be great at as an engineer is debugging. Debugging is nothing more than problem solving, or having fun with a puzzle. 
+// Debugging pattern:
+  // 1. Verify all of your assumptions by console.logging them with clear comments on what each log is
+  // 2. Find the last point in your code where things are doing what you expect them to/ the first point in your code where they're not doing what you expect.
+  // 3. Iterate rapidly. Try new things (and console.log them!) until you get to a solution that works. Pay attention to each new result along the way (even if it's not what you expect it to be) to see what new information you can learn from it.
+  // 4. High five someone nearby when you figure it out!
 
 // gameBoard is an array of arrays (an array that is filled with other arrays). Let's start by using each to iterate through the gameBoard array, console.logging each item inside the gameBoard array. You should see 8 arrays, each of length 8, logged to your console. Each array here represents a row. 
 _.each(gameBoard, function(item) {
@@ -117,7 +118,7 @@ gameBoard[3][5].color = 'black';
       );
     });
     console.log('results after filter:', results);
-  // Great! At this point, we should have an array that is filled with nested arrays. Each object in those nested arrays should be a square that has a gamePiece on it. TODO: Give them an example of what the result array looks like. 
+  // Great! At this point, we should have an array that is filled with nested arrays. Each object in those nested arrays should be a square that has a gamePiece on it. 
     // That should look something like: "results after filter: [Array[0], Array[0], Array[0], Array[3], Array[0], Array[2], Array[0], Array[0]]" for a gameBoard that has three gamePieces on row 3 and two game pieces on row 5.
  
 // We're now going to go on a mini-sprint covering reduce, the last critical functional programming tool. Understanding reduce will let us take this messy nested array we have, and turn it into a single, flattened array. 
@@ -205,7 +206,6 @@ gameBoard[3][5].color = 'black';
 // This ends our intro to the capstone project. By this point you should be pretty familiar with the gameBoard, the makePiece function, and all four of the main functional programming tools (each, map, filter, and reduce). From here on out, we're intentionally going to give you less guidance. One of the key skills to be a successful engineer is autonomy in accomplishing tasks that are given to you. We want you to get used to that feeling with these upcoming exercises. 
 
 
-// INTERNAL: explicitly calling these arrays 'ToAdd' should prevent any possible confusion from students trying to store the pieces into these arrays, since we only want them permanently stored in the gameBoard. 
 // 1. Create an array called piecesToAdd that holds the names of each of the pieces we'll create for each player. For example: ['kuddlyKoala', 'babyDino','babyDino', 'babyDino', 'fierceDragon', 'lazyPanda', 'lazyPanda']
 
 // 2. Create an array of the playerNames. For example: ['hermoineGranger', 'graceHopper']
@@ -224,7 +224,9 @@ gameBoard[3][5].color = 'black';
     // D. At this point, you should have an array of subarrays. Each of those subarrays will contain the positions of the squares in a given row that have a gamePiece on them. Now, let's use reduce to reduce this down to a single array that contains the position of all the squares we're interested in. 
     // E. Whew! You've now used all four of the canonical functional programming functions! Great job getting here. Now we have a single array that holds the position of all the gamePieces. Let's use each to go through that array and do something for each item in that array. Except we're going to use it in a slightly creative way (yay for creativity in programming! And here my momma thought I'd never be an artist.). We're just going to use each item in the positionsArray as information to go find the gamePiece at that position. Then, once we have those gamePieces, let's add an imageURL to each gamePiece so we can see the gamePieces on the board. 
       // imageURL is just a property on each object. All you need to do is add a link to an image. If you haven't done this before, you can right click on any image online, and get a link to that image. Set the imageURL property equal to that string, and voila! Your image will appear on the screen. 
+
 // 5. Use filter to grab all gamePieces of the same type, and then use each to iterate through them and set their movement descriptions. Don't worry about building out the logic of how you'd make them move- for now just have fun coming up with moves you'd want your various pieces to do. For example, maybe scaredKitty goes and hides in the corner, and impetuousDragon frequently flies off and leaves the board entirely. 
+
 // 6. Use reduce to create an object that has a tally of all our gamePieces. For example, the result might be: 
 // { babyDino: 3,
 //   impetutousDragon: 2,
@@ -232,6 +234,7 @@ gameBoard[3][5].color = 'black';
 //   hobblingPirate:8,
 //   groupHuggers:12 }
   // You should be able to do this by just using reduce inside of another reduce if you're feeling ambitious!
+
 // 7. When a user clicks on a square, the app will invoke a function on the global scope called 'clickHandler'. 
   // This funnction will be invoked with the indices of the square clicked on. For example, if the user clicked on the square in the top-left corner of the board, the clickHandler will be invoked like so: clickHandler([0,0]);
   // TODO: Uncomment the lines below and see what happens when you click on a square on the board!
@@ -242,10 +245,13 @@ gameBoard[3][5].color = 'black';
     // };
   // Write some logic inside of clickHandler that highlights all the squares in the row that has been clicked on by turning them pink. 
   // Now expand this to include all the squares in the same column as the square that was clicked on. So if the user clicks on a square in row 3, column 4, all squares in row 3 and all squares in column 4 should become pink. 
+
 // 8. Now let's go through and create a function to undo highlightPieces so the board is colored according to it's default, alternating colors. There are several different approaches that will work well here. Choose whichever one you want (but do keep practicing functional programming- that will be incredibly valuable, particularly if it's still a bit painful for you). Just keep in mind that the end goal is to return the board to a "normal" looking state where the color of the pieces alternates as it originally did, with the gamePieces still being displayed on the relevant squares. 
+
 // 9. Now let's abstract out this logic and put it into a function on each of our gamePieces. 
   // Create a function on each gamePiece called highlightSquares. Remove that functionality from our clickHandler function and put it into the highlightSquares function on each object. 
   // Now, inside clickHandler, let's see if there is a gamePiece on the square that was clicked on. If there is, invoke highlightSquares as a method on that object. 
+
 // 10. Now that highlightSquares is a method on each gamePiece object, we can change what each gamePiece's movement pattern is. Go through and change the logic of which squares on the board are highlighted for each different type of piece. For our scaredKitten example, whose movement description is "Runs to a corner and hides", we would highlight only the four corner squares. 
   // Each gamePiece of the same type should have the same highlightSquares functionality. 
   // See if you can highlight all the diagonal squares from a piece. 
@@ -257,11 +263,14 @@ gameBoard[3][5].color = 'black';
       // 4. up and to the left
       // Each one will have it's own logic and will likely have to be built out separately. Don't feel bad about this! Start by making just one of those four work. 
         // This is a super valuable pattern called MVP, or "Minimum Viable Product". All it means is get the tiniest possible version of something working first, then work on expanding it out to a full feature set. In this case, make one diagonal work first, then worry about the other three. 
+
 // 11. Now we're highlighting specific squares that represent where each piece can move to. Let's build out some logic, starting in our clickHandler, that lets us highlight squares on the board when a piece is clicked, and then un-highlight the board (return it to it's default state) when that same piece is clicked again. There are many different ways of accmplishing this too- we're going to challenge you to figure out which path you want to take!
+
 // 12. Now we can click on a piece to highlight the available squares it can move to, and click on it again to un-highlight those squares. Let's expand the logic of the highlightPieces methods! Check each square that gets highlighted to see if it has a piece on it or not. If there is a piece on that square already, set the text property of that square to be the following two lines:
   // "OXO
   // XOX"
   // This should tell the user that there is a potential collision on that square, if the piece were to move there. 
+
 // 13. Now let's build out the ability to make each piece move on the board! 
   // While a piece is clicked (i.e., the squares it can move to on the board are highlighted), if one of those squares is clicked on, move the piece there! 
   // For now, let's assume our user is being nice to us and will only try to move the gamePiece to a square that is eligible to be moved to. 
@@ -270,25 +279,23 @@ gameBoard[3][5].color = 'black';
     // 2. Remove the piece from it's current location
     // 3. Remove highlighting from the board
     // 4. Depending on your implementation, set that piece as inactive. 
+
 // 14. Great! Now we can click on a piece and then click on another square to move it there. That's pretty cool. But we've been assuming that our user would be nice to us by only trying to move a piece to where it's allowed to move. What if we wanted to allow not-so-nice people to play our game too? Let's add in a logic check here. Make sure the square the user clicks on to try to move a piece to is a square that piece can actually move to. 
   // How can we accomplish this? Well we've already highlighted the eligible squares on the board with a certain color, right? Let's use that to our advantage!
   // If the user-selected square isn't eligible, pop up an alert for the user telling them to either:
     // A. Choose a different square that is highlighted to move the piece to
     // B. Click on the same original square again to de-select that piece. 
-// 15. This is fantastic! 
-
-// highlight all the diagonals
-// experiment with creating an l-shaped movement pattern
-// only let them move to spaces they have access to (i.e., if you're moving down a row, you can only move until you hit a piece, then you can't move any further than that piece). 
-  // Set a property on each piece called invisibilityCloak. This property just takes a boolean value. If true, this piece can move through other pieces when it moves. If false, it must stop as soon as it encounters another piece along one of it's movement lines. 
-  // this whole idea of only being able to access some squares is going to be challenging. 
 
 
-// Ideas:
+// More Ideas:
   // collisionCount
   // Use map to advance all pieces one space closer towards the center (if their row is more than half, move their row down by one, if their row is less than half, increase their row by one).
   //use map to iterate through all pieces for each side and randomly 'gift' half of each player's objects to the other player. Call this command 'The Great Equalizer'
   // Add a count of the number of pieces that could move to a certain square, onto every square. We could definitely use some functional programming for this. 
+  // only let them move to spaces they have access to (i.e., if you're moving down a row, you can only move until you hit a piece, then you can't move any further than that piece). 
+    // Set a property on each piece called invisibilityCloak. This property just takes a boolean value. If true, this piece can move through other pieces when it moves. If false, it must stop as soon as it encounters another piece along one of it's movement lines. 
+    // this whole idea of only being able to access some squares is going to be challenging. 
+
 
 
   // NOTE: there are two separate things going on: you making a change to the javascript code/logic behind the app, and rendering that new "state" to the DOM (what appears on the screen). In order to see any changes you make rendered to the screen, we need to call renderGameBoard() and pass in the updated gameBoard as an argument. 
