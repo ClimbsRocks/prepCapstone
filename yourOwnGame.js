@@ -236,16 +236,15 @@ gameBoard[3][5].color = 'black';
     // A. Choose a different square that is highlighted to move the piece to
     // B. Click on the same original square again to de-select that piece. 
 
-
-// More Ideas:
-  // collisionCount
-  // Use map to advance all pieces one space closer towards the center (if their row is more than half, move their row down by one, if their row is less than half, increase their row by one).
-  //use map to iterate through all pieces for each side and randomly 'gift' half of each player's objects to the other player. Call this command 'The Great Equalizer'
-  // Add a count of the number of pieces that could move to a certain square, onto every square. We could definitely use some functional programming for this. 
-  // only let them move to spaces they have access to (i.e., if you're moving down a row, you can only move until you hit a piece, then you can't move any further than that piece). 
-    // Set a property on each piece called invisibilityCloak. This property just takes a boolean value. If true, this piece can move through other pieces when it moves. If false, it must stop as soon as it encounters another piece along one of it's movement lines. 
-    // this whole idea of only being able to access some squares is going to be challenging. 
-
+/*
+CONGRATULATIONS!!
+You've now gotten in extensive practice on functional programming, and should be incredibly comfortable with a variety of creative ways to put functional programming to use!
+You've typed up many, many lines of code, debugged extensively, and learned some basics of making things show up on the user's screen. 
+You've built out the basic functionality needed for a board game. From here, you can easily extend this to be whatever you want it to be! You can build out your own game logic from here to make it into any game you want. You can add in your own gamePieces (with their own funny images!), and style the board any way you want. 
+Hope you've had an awesome time on these first parts of your JS Journey! We're honored that we got to share them with you. Can't wait to see the amazing things your future holds in store with these newfound skills :)
+Sincerely,
+The team at Telegraph Academy
+*/
 
 
   // NOTE: there are two separate things going on: you making a change to the javascript code/logic behind the app, and rendering that new "state" to the DOM (what appears on the screen). In order to see any changes you make rendered to the screen, we need to call renderGameBoard() and pass in the updated gameBoard as an argument. 
