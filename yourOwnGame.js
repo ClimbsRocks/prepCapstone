@@ -246,49 +246,52 @@ gameBoard[3][5].color = 'black';
 // 9. Now let's abstract out this logic and put it into a function on each of our gamePieces. 
   // Create a function on each gamePiece called highlightSquares. Remove that functionality from our clickHandler function and put it into the highlightSquares function on each object. 
   // Now, inside clickHandler, let's see if there is a gamePiece on the square that was clicked on. If there is, invoke highlightSquares as a method on that object. 
-// 10. Now that highlightSquares is a method on each gamePiece object, we can change what each object's movement pattern is. Go through and change the logic of which squares on the board are highlighted for each different type of piece. For our scaredKitten example, whose movement description is "Runs to a corner and hides", we would highlight only the four corner squares. 
+// 10. Now that highlightSquares is a method on each gamePiece object, we can change what each gamePiece's movement pattern is. Go through and change the logic of which squares on the board are highlighted for each different type of piece. For our scaredKitten example, whose movement description is "Runs to a corner and hides", we would highlight only the four corner squares. 
   // Each gamePiece of the same type should have the same highlightSquares functionality. 
+  // See if you can highlight all the diagonal squares from a piece. 
+    // HINT: This is going to sound obvious, but what math do you have to do to move from square [0,0] to it's lower-right diagonal of [1,1]? 
+    // HINT: There are 4 potential diagonals from a given square: 
+      // 1. up and to the right
+      // 2. down and to the right
+      // 3. down and to the left
+      // 4. up and to the left
+      // Each one will have it's own logic and will likely have to be built out separately. Don't feel bad about this! Start by making just one of those four work. 
+        // This is a super valuable pattern called MVP, or "Minimum Viable Product". All it means is get the tiniest possible version of something working first, then work on expanding it out to a full feature set. In this case, make one diagonal work first, then worry about the other three. 
 // 11. Now we're highlighting specific squares that represent where each piece can move to. Let's build out some logic, starting in our clickHandler, that lets us highlight squares on the board when a piece is clicked, and then un-highlight the board (return it to it's default state) when that same piece is clicked again. There are many different ways of accmplishing this too- we're going to challenge you to figure out which path you want to take!
 // 12. Now we can click on a piece to highlight the available squares it can move to, and click on it again to un-highlight those squares. Let's expand the logic of the highlightPieces methods! Check each square that gets highlighted to see if it has a piece on it or not. If there is a piece on that square already, set the text property of that square to be the following two lines:
-/*
-"
-OXO
-XOX
-"
-*/
+  // "OXO
+  // XOX"
+  // This should tell the user that there is a potential collision on that square, if the piece were to move there. 
+// 13. Now let's build out the ability to make each piece move on the board! 
+  // While a piece is clicked (i.e., the squares it can move to on the board are highlighted), if one of those squares is clicked on, move the piece there! 
+  // For now, let's assume our user is being nice to us and will only try to move the gamePiece to a square that is eligible to be moved to. 
+  // When this happens, there are two things we need to do:
+    // 1. Add the piece to it's new location
+    // 2. Remove the piece from it's current location
+    // 3. Remove highlighting from the board
+    // 4. Depending on your implementation, set that piece as inactive. 
+// 14. Great! Now we can click on a piece and then click on another square to move it there. That's pretty cool. But we've been assuming that our user would be nice to us by only trying to move a piece to where it's allowed to move. What if we wanted to allow not-so-nice people to play our game too? Let's add in a logic check here. Make sure the square the user clicks on to try to move a piece to is a square that piece can actually move to. 
+  // How can we accomplish this? Well we've already highlighted the eligible squares on the board with a certain color, right? Let's use that to our advantage!
+  // If the user-selected square isn't eligible, pop up an alert for the user telling them to either:
+    // A. Choose a different square that is highlighted to move the piece to
+    // B. Click on the same original square again to de-select that piece. 
+// 15. This is fantastic! 
+
+// highlight all the diagonals
+// experiment with creating an l-shaped movement pattern
+// only let them move to spaces they have access to (i.e., if you're moving down a row, you can only move until you hit a piece, then you can't move any further than that piece). 
+  // Set a property on each piece called invisibilityCloak. This property just takes a boolean value. If true, this piece can move through other pieces when it moves. If false, it must stop as soon as it encounters another piece along one of it's movement lines. 
+  // this whole idea of only being able to access some squares is going to be challenging. 
+
 
 // Ideas:
   // collisionCount
   // Use map to advance all pieces one space closer towards the center (if their row is more than half, move their row down by one, if their row is less than half, increase their row by one).
-  // Use filter to find only those squares that have a collision. 
-  //use map to iterate through all objects of the same type and set their collision descriptions
   //use map to iterate through all pieces for each side and randomly 'gift' half of each player's objects to the other player. Call this command 'The Great Equalizer'
-  // What are other easy ways of easing them into this? 
-  // Use map to change the color of all squares a piece is eligible to move to. 
-    // Store this as a method on each gamePiece object, so you can just call gamePiece.highlightSquares() no matter which piece it is
-  // Hightlight all the squares that all gamePieces can move to!
   // Add a count of the number of pieces that could move to a certain square, onto every square. We could definitely use some functional programming for this. 
-  // When a piece is clicked:
-    // Set that piece to active if it's the first time it's clicked
-    // Change the color of all the squares that piece can move to.
-    // Deactivate that piece if it already is the active one. 
-    // Change back the color of all the squares that piece can move to. 
-
-  // When a piece is moved:
-    // Check to make sure it's a valid move
-    // If so change the color of the squares it can move to back to their original color
-      // check for collisions
-      // perform whatever logic suits your game on a collision
-        // ADVANCED: don't let a piece move through another piece. If it's moving down a row, and there's a piece between it and it's destination, it should not be allowed to complete that move. 
-    // If it is not a valid move, alert the user that this is not a valid move. Give them the chance to cancel (deactivate) this piece by clicking on Ok or Cancel
 
 
-
-  // gameBoard[row][column] will get you the squareObj at that position in the gameBoard. So gameBoard[2][6] will point to the squareObj on row 3 column 7. Quick review on how this works: JS chains operators together, the results of each one being passed to the next operation. So first we're accessing the thing at position 2 in our gameBoard when we say gameBoard[2]. Then, within that thing (which is an array representing a row), we're asking for the thing at the 6th position (which is going to be a squareObj). 
-  // We could chain this together even more. Explain with your pair each individual operation that's going on when we say:
-
-
-  // NOTE: there are two separate things going on: you making a change to the javascript code/logic behind the app, and rendering that new "state" to the DOM (what appears on the screen). In order to see any changes you make rendered to the screen, you need to call renderGameBoard() and pass in the updated gameBoard as an argument. 
+  // NOTE: there are two separate things going on: you making a change to the javascript code/logic behind the app, and rendering that new "state" to the DOM (what appears on the screen). In order to see any changes you make rendered to the screen, we need to call renderGameBoard() and pass in the updated gameBoard as an argument. 
   renderGameBoard(gameBoard); // DON'T REMOVE THIS LINE. This line makes sure that any changes you make to your JS code will actually show up on the screen. Try commenting it out and see how the gameBoard is no longer rendered to the browser, even though your logic is clearly still running, as seen by your console.logs. 
 
 });
