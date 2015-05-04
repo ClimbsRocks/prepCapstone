@@ -242,12 +242,20 @@ gameBoard[3][5].color = 'black';
     // };
   // Write some logic inside of clickHandler that highlights all the squares in the row that has been clicked on by turning them pink. 
   // Now expand this to include all the squares in the same column as the square that was clicked on. So if the user clicks on a square in row 3, column 4, all squares in row 3 and all squares in column 4 should become pink. 
-// 8. Now let's abstract out this logic and put it into a function on each of our gamePieces. 
+// 8. Now let's go through and create a function to undo highlightPieces so the board is colored according to it's default, alternating colors. There are several different approaches that will work well here. Choose whichever one you want (but do keep practicing functional programming- that will be incredibly valuable, particularly if it's still a bit painful for you). Just keep in mind that the end goal is to return the board to a "normal" looking state where the color of the pieces alternates as it originally did, with the gamePieces still being displayed on the relevant squares. 
+// 9. Now let's abstract out this logic and put it into a function on each of our gamePieces. 
   // Create a function on each gamePiece called highlightSquares. Remove that functionality from our clickHandler function and put it into the highlightSquares function on each object. 
   // Now, inside clickHandler, let's see if there is a gamePiece on the square that was clicked on. If there is, invoke highlightSquares as a method on that object. 
-// 9. Now that highlightSquares is a method on each gamePiece object, we can change what each object's movement pattern is. Go through and change the logic of which squares on the board are highlighted for each different type of piece. For our scaredKitten example, whose movement description is "Runs to a corner and hides", we would highlight only the four corner squares. 
+// 10. Now that highlightSquares is a method on each gamePiece object, we can change what each object's movement pattern is. Go through and change the logic of which squares on the board are highlighted for each different type of piece. For our scaredKitten example, whose movement description is "Runs to a corner and hides", we would highlight only the four corner squares. 
   // Each gamePiece of the same type should have the same highlightSquares functionality. 
-// 10. Now let's go through and undo highlightPieces. 
+// 11. Now we're highlighting specific squares that represent where each piece can move to. Let's build out some logic, starting in our clickHandler, that lets us highlight squares on the board when a piece is clicked, and then un-highlight the board (return it to it's default state) when that same piece is clicked again. There are many different ways of accmplishing this too- we're going to challenge you to figure out which path you want to take!
+// 12. Now we can click on a piece to highlight the available squares it can move to, and click on it again to un-highlight those squares. Let's expand the logic of the highlightPieces methods! Check each square that gets highlighted to see if it has a piece on it or not. If there is a piece on that square already, set the text property of that square to be the following two lines:
+/*
+"
+OXO
+XOX
+"
+*/
 
 // Ideas:
   // collisionCount
